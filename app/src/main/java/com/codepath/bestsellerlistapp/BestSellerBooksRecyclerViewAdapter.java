@@ -1,5 +1,7 @@
 package com.codepath.bestsellerlistapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,13 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         holder.mBookDescription.setText(books.get(position).description);
         Glide.with(holder.mView.getContext()).load(books.get(position).bookImageUrl).centerInside().into(holder.mbookImage);
 
+        holder.mbuyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(books.get(position).amazonUrl));
+                holder.mView.getContext().startActivity(i);
+            }
+        });
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
