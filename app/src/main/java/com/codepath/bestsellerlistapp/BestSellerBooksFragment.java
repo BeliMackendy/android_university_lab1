@@ -1,6 +1,7 @@
 package com.codepath.bestsellerlistapp;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.core.widget.ContentLoadingProgressBar;
@@ -49,8 +50,17 @@ public class BestSellerBooksFragment extends Fragment implements OnListFragmentI
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
         Context context = view.getContext();
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-        updateAdapter(progressBar, recyclerView);
+        int orientation = getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_LANDSCAPE)
+        {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 4));
+            updateAdapter(progressBar, recyclerView);
+        }else
+        {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+            updateAdapter(progressBar, recyclerView);
+        }
+
         return view;
     }
 
